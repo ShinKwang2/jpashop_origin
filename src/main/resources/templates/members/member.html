@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head th:replace="fragments/header :: header" />
+
+<body>
+
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+
+    <!-- 추가 -->
+    <h2 th:if="${param.status}" th:text="'저장 완료'"></h2>
+
+    <div th:object="${memberForm}">
+        <div class="form-group">
+            <label th:for="name">이름</label>
+            <input text="text" th:field="*{name}" class="form-control" th:value="*{name}" readonly>
+        </div>
+
+        <div class="form-group">
+            <label th:for="city">도시</label>
+            <input type="text" th:field="*{city}" class="form-control" value="서울" th:value="*{city}" readonly>
+        </div>
+
+        <div class="form-group">
+            <label th:for="street">거리</label>
+            <input type="text" th:field="*{street}" class="form-control" value="연세로 50" th:value="*{street}" readonly>
+        </div>
+
+        <div class="form-group">
+            <label th:for="zipcode">우편번호</label>
+            <input type="text" th:field="*{zipcode}" class="form-control" value="03722" th:value="*{zipcode}" readonly>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <button class="w-100 btn btn-primary btn-lg"
+                        onclick="location.href='editForm.html'"
+                        th:onclick="|location.href='@{/members/{memberFormId}/edit(memberFormId=${memberForm.id})}'|"
+                        type="button">회원 정보 수정</button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn btn-secondary btn-lg"
+                        th:onclick="|location.href='@{/members}'|"
+                        type="button">목록으로</button>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+
+</body>
+</html>
+
+</body>
+</html>

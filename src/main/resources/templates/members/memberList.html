@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"/>
+<body>
+
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>이름</th>
+                <th>도시</th>
+                <th>주소</th>
+                <th>우편번호</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member : ${members}">
+                <td><a href="member.html" th:href="@{/members/{memberId}(memberId=${member.id})}"
+                       th:text="${member.id}">ID</a></td>
+                <td><a href="member.html" th:href="@{|/members/${member.id}|}" th:text="${member.name}">이름</a></td>
+                <td th:text="${member.address?.city}">도시</td>
+                <td th:text="${member.address?.street}">거리</td>
+                <td th:text="${member.address?.zipcode}">우편번호</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary float-start"
+                    onclick="location.href='home.html'"
+                    th:onclick="|location.href='@{/}'|"
+                    type="button">홈으로</button>
+        </div>
+    </div>
+    <br>
+
+    <div th:replace="fragments/footer :: footer" />
+
+</div> <!-- /container -->
+
+</body>
+</html>
